@@ -1,0 +1,16 @@
+object_tracking_node:
+  ros__parameters:
+    # 追踪器类型：bytetrack 或 ocsort（用于默认 config_path，若 config_path 非空则忽略）
+    tracker_type: "bytetrack"
+    # 留空则使用 config/<tracker_type>.yaml
+    config_path: ""
+    lazy_load: true
+    score_threshold: 0.25
+    image_topic: "/camera/image_raw"   # 直连摄像头时发布到此话题；订阅模式时从此话题收图
+    use_camera: true    # true=直连摄像头并发布 /camera/image_raw；false=订阅 image_topic
+    camera_id: 1
+    camera_fps: 30.0
+    detections_topic: "/perception/tracks"
+    boxes_topic: "/object_tracking/boxes"
+    debug_image_topic: "/object_tracking/debug_image"
+  # labels: ["person", "bicycle", "car"]  # 可选；留空时使用代码默认(class_<id>)
