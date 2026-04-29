@@ -1,0 +1,19 @@
+# OC-SORT 目标追踪（与 model_zoo/cv examples/ocsort 一致）
+model_path: ~/.cache/models/vision/yolov8/yolov8n.q.onnx
+test_video: ~/.cache/assets/video/003_palace.mp4
+label_file_path: assets/labels/coco.txt
+class: deploy.ocsort.OCSortTracker
+default_params:
+  conf_threshold: 0.25
+  iou_threshold: 0.45
+  num_threads: 4
+  providers:
+    - SpaceMITExecutionProvider
+  track_thresh: 0.6
+  track_iou_thresh: 0.3
+  track_buffer: 60
+  min_hits: 3
+  delta_t: 3
+  asso_func: "iou"
+  inertia: 0.2
+  use_byte: false
