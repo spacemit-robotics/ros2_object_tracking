@@ -1,0 +1,34 @@
+module: middleware/ros2/perception/object_tracking
+
+tests:
+  - name: object-tracking-functional
+    description: Verify object_tracking config errors, ByteTrack/OC-SORT paths, and boxes topic (requires SDK staging build).
+    category: functional
+    scopes: [pr]
+    timeout_s: 300
+    workdir: sdk
+    command: |
+      cd middleware/ros2/perception
+      bash object_tracking/tests/test_functional.sh
+
+  - name: object-tracking-invalid-input
+    description: Reject invalid yaml, missing config/model, invalid tracker_type, and bad score_threshold.
+    category: functional
+    scopes: [pr]
+    timeout_s: 180
+    workdir: sdk
+    command: |
+      cd middleware/ros2/perception
+      bash object_tracking/tests/test_invalid_input.sh
+
+  - name: object-tracking-performance
+    description: ByteTrack and OC-SORT init latency with real model (threshold 5s each); first-output test is intentionally skipped.
+    category: performance
+    scopes: [scheduled]
+    timeout_s: 300
+    artifacts:
+      - perception_perf_object_tracking.txt
+    workdir: sdk
+    command: |
+      cd middleware/ros2/perception
+      bash object_tracking/tests/test_performance.sh
