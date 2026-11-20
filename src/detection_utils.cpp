@@ -53,6 +53,7 @@ vision_msgs::msg::Detection2DArray EncodeDetection2DArray(
     for (const auto& b : boxes) {
         vision_msgs::msg::Detection2D det;
         det.header = header;
+        det.id = std::to_string(b.track_id);
 
         det.bbox.center.position.x = static_cast<double>(b.x1 + b.x2) / 2.0;
         det.bbox.center.position.y = static_cast<double>(b.y1 + b.y2) / 2.0;
